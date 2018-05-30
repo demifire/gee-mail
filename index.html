@@ -5,14 +5,75 @@
     <script>
       window.onload = function(){
         // ALL OF YOUR JAVASCRIPT CODE SHOULD GO HERE. 
-        // We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
-        
-      };
+				// We have to use window.onload so your JavaScript doesn't execute until the page has loaded and all HTML has been downloaded to your browser
+				
+function generateElem(elemType, className, text, place, id) { 
+	var newElem = document.createElement(elemType);
+  newElem.className = className;
+	newElem.innerHTML = text;
+	newElem.id = id;
+
+	if (newElem.id === 'new') {
+		place.insertBefore(newElem, place.firstChild);
+		} else {place.appendChild(newElem)}
+		
+	return newElem;
+	} 	
+
+var headerSection = generateElem('div', 'header', null, document.body)
+var contentSection = generateElem('div', 'content', null, document.body)
+
+for (var i=0; i < window.geemails.length; i++) {  
+	var wrapperElem = generateElem('div', 'wrapper', null, contentSection);
+	generateElem('div', 'date', window.geemails[i].date, wrapperElem);
+	generateElem('div', 'subject', window.geemails[i].subject, wrapperElem);  
+	generateElem('div', 'sender', window.geemails[i].sender, wrapperElem);
+	generateElem('div', 'body', window.geemails[i].body, wrapperElem);
+	} 
+
+function newMail(){
+	var wrapperElem = generateElem('div', 'wrapper', null, contentSection, 'new');
+	generateElem('div', 'date', getNewMessage().date, wrapperElem);
+	generateElem('div', 'subject', getNewMessage().subject, wrapperElem);  
+	generateElem('div', 'sender', getNewMessage().sender, wrapperElem);
+	generateElem('div', 'body', getNewMessage().body, wrapperElem);
+	wrapperElem.addEventListener('click', Toggle);
+	counter.innerHTML++;
+	}
+
+setInterval(newMail, 5000);
+
+var inbox = generateElem('span', 'inbox','GeeMail Inbox ', headerSection);
+var counter = generateElem('span', 'counter', contentSection.childElementCount, inbox);
+
+function addToggle(){
+var emailWrap = document.getElementsByClassName('wrapper');
+for(var i = 0; i<emailWrap.length; i++){
+  emailWrap[i].addEventListener('click', Toggle)}	
+	}
+
+function Toggle(){
+ if(this.querySelectorAll('.body')[0].style.display === 'block'){
+	 (this.querySelectorAll('.body')[0].style.display = 'none');
+	 (this.querySelectorAll('.sender')[0].style.flex = '1');
+	 (this.querySelectorAll('.subject')[0].style.flex = '4');
+	 (this.querySelectorAll('.date')[0].style.display = 'block');
+ }else{
+	 (this.querySelectorAll('.body')[0].style.display = 'block');
+	 (this.querySelectorAll('.sender')[0].style.flex = '4');
+	 (this.querySelectorAll('.subject')[0].style.flex = '4');
+	 (this.querySelectorAll('.sender')[0].style.order = '1');
+	 (this.querySelectorAll('.subject')[0].style.order = '2');
+	 (this.querySelectorAll('.date')[0].style.display = 'none');}  
+	}
+
+addToggle();
+};
+
     </script>
 	</head>
 	<body>
-		<div class="container" id="main">
-			Build Me!
-		</div>
+	
+</div>
 	</body>
 </html>

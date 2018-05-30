@@ -1,0 +1,49 @@
+.header {
+  background-color: cornflowerblue;
+  font-size: 24;
+  color: white;
+  padding: 10px;
+}
+
+.counter::before { 
+    content: "(";
+}
+
+.counter::after { 
+  content: ")";
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+
+.content div {
+  border: 1px #ccc solid;
+  padding: 10px;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.date {
+  flex: 1;
+  order: 3;
+}
+
+.subject {
+  flex: 4;
+  order: 2;
+}
+
+.sender {
+  flex: 1;
+  order: 1;
+}
+
+.body {
+  display: none;
+  flex: 100;
+  order: 3;
+}
